@@ -3,952 +3,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="BroBudget - Financial Analytics, Category Charts, Savings Goals, and Executive Monthly Reports."
-  >
-
+  <meta name="description" content="BroBudget - Financial Analytics, Category Charts, Savings Goals, and Executive Monthly Reports.">
   <title>BroBudget | Analytics &amp; Savings Goals</title>
 
-  <!-- Favicon -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="assets/logo/bb-icon.svg"
-  >
+  <!-- Favicon / App Icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/bb-icon.svg">
 
-  <!-- Analytics Styles -->
-  <link
-    rel="stylesheet"
-    href="css/analytics.css"
-  >
+  <!-- Analytics Stylesheet (Developer 3 Module) -->
+  <link rel="stylesheet" href="css/analytics.css">
 
-  <!-- Chart.js -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
-    defer
-  ></script>
+  <!-- Lightweight Chart.js via CDN (Automatic pure Canvas fallback if offline) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
 </head>
-
 <body>
 
-  <div class="bb-analytics-app-container">
+  <!-- Root Application Layout -->
+  <div class="bb-app-layout">
 
-    <!-- ================================================================
-         HEADER
-         ================================================================ -->
+    <!-- Mobile Drawer Backdrop -->
+    <div id="bb-sidebar-backdrop" class="bb-sidebar-backdrop" aria-hidden="true"></div>
 
-    <header class="bb-analytics-header">
-
-      <a
-        href="analytics.html"
-        class="bb-analytics-brand-link"
-        aria-label="BroBudget Analytics"
-      >
-        <div class="bb-analytics-brand-emblem">
-          <span>💵 BB</span>
-        </div>
-
-        <div class="bb-analytics-brand-meta">
-          <div class="bb-analytics-brand-title">
-            Bro<span>Budget</span>
+    <!-- ====================================================================
+         1. SIDEBAR NAVIGATION COMPONENT
+         ==================================================================== -->
+    <aside id="bb-sidebar" class="bb-sidebar-aside" aria-label="Main Navigation">
+      
+      <!-- Brand Header -->
+      <div class="bb-sidebar-brand-header">
+        <a href="index.html" class="bb-sidebar-brand-link" aria-label="BroBudget Home">
+          <div class="bb-sidebar-brand-emblem">
+            <span class="bb-sidebar-brand-icon-text">💵 BB</span>
           </div>
-
-          <div class="bb-analytics-brand-subtitle">
-            Analytics &amp; Goals
+          <div class="bb-sidebar-brand-meta">
+            <div class="bb-sidebar-brand-title">Bro<span>Budget</span></div>
+            <div class="bb-sidebar-brand-subtitle">Financial OS</div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
 
-      <nav
-        class="bb-analytics-header-nav"
-        aria-label="Quick Navigation"
-      >
-
-        <!-- Same-project navigation -->
-        <a
-          href="index.html"
-          class="bb-analytics-nav-link"
-          title="Open Main Dashboard"
-        >
-          <span>🏠</span>
-          <span>Dashboard</span>
+      <!-- Navigation Links -->
+      <nav class="bb-sidebar-nav-container" aria-label="Primary App Navigation">
+        <div class="bb-sidebar-nav-label">Navigation</div>
+        
+        <!-- 1. Dashboard -->
+        <a href="index.html" class="bb-sidebar-nav-item" data-page="dashboard">
+          <div class="bb-sidebar-nav-item-left">
+            <span class="bb-sidebar-nav-icon" aria-hidden="true">🏠</span>
+            <span class="bb-sidebar-nav-text">Dashboard</span>
+          </div>
         </a>
 
-        <a
-          href="transactions.html"
-          class="bb-analytics-nav-link"
-          title="Open Transactions"
-        >
-          <span>💸</span>
-          <span>Transactions</span>
+        <!-- 2. Transactions -->
+        <a href="transactions.html" class="bb-sidebar-nav-item" data-page="transactions">
+          <div class="bb-sidebar-nav-item-left">
+            <span class="bb-sidebar-nav-icon" aria-hidden="true">💸</span>
+            <span class="bb-sidebar-nav-text">Transactions</span>
+          </div>
+          <span id="bb-sidebar-count-tx" class="bb-sidebar-count-badge">0</span>
         </a>
 
-        <a
-          href="analytics.html"
-          class="bb-analytics-nav-link bb-nav-active"
-          aria-current="page"
-        >
-          <span>📊</span>
-          <span>Analytics</span>
+        <!-- 3. Analytics (Active) -->
+        <a href="analytics.html" class="bb-sidebar-nav-item bb-sidebar-active" data-page="analytics" aria-current="page">
+          <div class="bb-sidebar-nav-item-left">
+            <span class="bb-sidebar-nav-icon" aria-hidden="true">📊</span>
+            <span class="bb-sidebar-nav-text">Analytics</span>
+          </div>
+          <span id="bb-sidebar-count-goals" class="bb-sidebar-count-badge">0</span>
         </a>
 
+        <!-- 4. Savings Goals -->
+        <a href="#bb-savings-goals-grid" class="bb-sidebar-nav-item" data-page="goals">
+          <div class="bb-sidebar-nav-item-left">
+            <span class="bb-sidebar-nav-icon" aria-hidden="true">🎯</span>
+            <span class="bb-sidebar-nav-text">Savings Goals</span>
+          </div>
+        </a>
       </nav>
 
-    </header>
-
-
-    <!-- ================================================================
-         MAIN CONTENT
-         ================================================================ -->
-
-    <main class="bb-analytics-main-content">
-
-
-      <!-- ==============================================================
-           PAGE TITLE
-           ============================================================== -->
-
-      <section
-        class="bb-analytics-title-banner"
-        aria-label="Analytics Title"
-      >
-
-        <div class="bb-analytics-title-box">
-
-          <h1>
-            Financial Analytics &amp; Intelligence
-          </h1>
-
-          <p>
-            Multi-month capital trends, category breakdowns,
-            and wealth goals
-          </p>
-
+      <!-- Sidebar User Profile Footer -->
+      <div class="bb-sidebar-footer">
+        <div class="bb-sidebar-user-card">
+          <div class="bb-sidebar-avatar" aria-hidden="true">BB</div>
+          <div class="bb-sidebar-user-info">
+            <span class="bb-sidebar-user-name">Alex Mercer</span>
+            <span class="bb-sidebar-user-status">
+              <span class="bb-sidebar-user-status-dot"></span>
+              Pro Member
+            </span>
+          </div>
         </div>
+      </div>
+    </aside>
 
-        <div class="bb-analytics-header-actions">
+    <!-- ====================================================================
+         2. MAIN WRAPPER
+         ==================================================================== -->
+    <div class="bb-main-wrapper">
 
-          <button
-            type="button"
-            id="bb-btn-open-goal-modal"
-            class="bb-btn-primary-purple"
-          >
-            <span>🎯</span>
-            <span>+ Create Savings Goal</span>
+      <!-- Top Header Bar -->
+      <header class="bb-app-header">
+        <div class="bb-app-header-left">
+          <!-- Mobile Toggle Button -->
+          <button id="bb-sidebar-toggle" type="button" class="bb-app-menu-btn" aria-label="Toggle Navigation Sidebar">
+            ☰
           </button>
-
+          <div class="bb-app-header-title-box">
+            <h1>Financial Analytics &amp; Intelligence</h1>
+            <p>Multi-month capital trends, category breakdowns, and wealth goals</p>
+          </div>
         </div>
 
-      </section>
+        <div class="bb-app-header-right">
+          <!-- Active Period Badge -->
+          <div class="bb-app-header-badge">
+            <span class="bb-pulse-dot" aria-hidden="true"></span>
+            <span id="bb-current-month-label">October 2026</span>
+          </div>
+        </div>
+      </header>
 
+      <!-- Page Content (Developer 3 Module) -->
+      <main class="bb-page-content bb-analytics-main-content">
 
-      <!-- ==============================================================
-           KPI CARDS
-           ============================================================== -->
+        <!-- Title Banner with Modal Trigger -->
+        <section class="bb-analytics-title-banner" aria-label="Analytics Title">
+          <div class="bb-analytics-title-box">
+            <h2 style="font-size:22px; font-weight:800; color:#fff;">Capital Flow &amp; Portfolio Velocity</h2>
+            <p style="font-size:13px; color:var(--bb-text-secondary); margin-top:2px;">Consolidated ledger intelligence and long-term milestones</p>
+          </div>
+          <div class="bb-analytics-header-actions">
+            <button type="button" id="bb-btn-open-goal-modal" class="bb-btn-primary-purple">
+              <span>🎯</span>
+              <span>+ Create Savings Goal</span>
+            </button>
+          </div>
+        </section>
 
-      <section
-        class="bb-analytics-kpi-grid"
-        aria-label="Cumulative Metrics"
-      >
-
-        <!-- Income -->
-
-        <article
-          class="bb-analytics-kpi-card bb-kpi-income"
-        >
-
-          <div class="bb-analytics-kpi-header">
-
-            <div
-              class="bb-analytics-kpi-icon"
-              aria-hidden="true"
-            >
-              💰
+        <!-- KPI Summary Cards -->
+        <section class="bb-analytics-kpi-grid" aria-label="Cumulative Metrics">
+          
+          <article class="bb-analytics-kpi-card bb-kpi-income">
+            <div class="bb-analytics-kpi-header">
+              <div class="bb-analytics-kpi-icon" aria-hidden="true">💰</div>
+              <span class="bb-analytics-kpi-label">Cumulative Inflows</span>
             </div>
+            <div id="bb-kpi-total-income" class="bb-analytics-kpi-value">₹0</div>
+            <div class="bb-analytics-kpi-subtext">Total recorded earnings across periods</div>
+          </article>
 
-            <span class="bb-analytics-kpi-label">
-              Cumulative Inflows
-            </span>
-
-          </div>
-
-          <div
-            id="bb-kpi-total-income"
-            class="bb-analytics-kpi-value"
-          >
-            ₹0
-          </div>
-
-          <div class="bb-analytics-kpi-subtext">
-            Total recorded earnings across periods
-          </div>
-
-        </article>
-
-
-        <!-- Expenses -->
-
-        <article
-          class="bb-analytics-kpi-card bb-kpi-expense"
-        >
-
-          <div class="bb-analytics-kpi-header">
-
-            <div
-              class="bb-analytics-kpi-icon"
-              aria-hidden="true"
-            >
-              💸
+          <article class="bb-analytics-kpi-card bb-kpi-expense">
+            <div class="bb-analytics-kpi-header">
+              <div class="bb-analytics-kpi-icon" aria-hidden="true">💸</div>
+              <span class="bb-analytics-kpi-label">Cumulative Outflows</span>
             </div>
+            <div id="bb-kpi-total-expenses" class="bb-analytics-kpi-value">₹0</div>
+            <div class="bb-analytics-kpi-subtext">Total recorded expenditures</div>
+          </article>
 
-            <span class="bb-analytics-kpi-label">
-              Cumulative Outflows
-            </span>
-
-          </div>
-
-          <div
-            id="bb-kpi-total-expenses"
-            class="bb-analytics-kpi-value"
-          >
-            ₹0
-          </div>
-
-          <div class="bb-analytics-kpi-subtext">
-            Total recorded expenditures
-          </div>
-
-        </article>
-
-
-        <!-- Savings -->
-
-        <article
-          class="bb-analytics-kpi-card bb-kpi-savings"
-        >
-
-          <div class="bb-analytics-kpi-header">
-
-            <div
-              class="bb-analytics-kpi-icon"
-              aria-hidden="true"
-            >
-              🎯
+          <article class="bb-analytics-kpi-card bb-kpi-savings">
+            <div class="bb-analytics-kpi-header">
+              <div class="bb-analytics-kpi-icon" aria-hidden="true">🎯</div>
+              <span class="bb-analytics-kpi-label">Retained Wealth</span>
             </div>
+            <div id="bb-kpi-total-savings" class="bb-analytics-kpi-value">₹0</div>
+            <div class="bb-analytics-kpi-subtext">Net liquid savings accumulated</div>
+          </article>
 
-            <span class="bb-analytics-kpi-label">
-              Retained Wealth
-            </span>
-
-          </div>
-
-          <div
-            id="bb-kpi-total-savings"
-            class="bb-analytics-kpi-value"
-          >
-            ₹0
-          </div>
-
-          <div class="bb-analytics-kpi-subtext">
-            Net liquid savings accumulated
-          </div>
-
-        </article>
-
-
-        <!-- Savings Rate -->
-
-        <article
-          class="bb-analytics-kpi-card bb-kpi-rate"
-        >
-
-          <div class="bb-analytics-kpi-header">
-
-            <div
-              class="bb-analytics-kpi-icon"
-              aria-hidden="true"
-            >
-              📈
+          <article class="bb-analytics-kpi-card bb-kpi-rate">
+            <div class="bb-analytics-kpi-header">
+              <div class="bb-analytics-kpi-icon" aria-hidden="true">📈</div>
+              <span class="bb-analytics-kpi-label">Average Savings Rate</span>
             </div>
+            <div id="bb-kpi-savings-rate" class="bb-analytics-kpi-value">0.0%</div>
+            <div class="bb-analytics-kpi-subtext">Global capital retention efficiency</div>
+          </article>
 
-            <span class="bb-analytics-kpi-label">
-              Average Savings Rate
-            </span>
+        </section>
 
-          </div>
-
-          <div
-            id="bb-kpi-savings-rate"
-            class="bb-analytics-kpi-value"
-          >
-            0.0%
-          </div>
-
-          <div class="bb-analytics-kpi-subtext">
-            Global capital retention efficiency
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- ==============================================================
-           AUTOMATED INSIGHTS
-           ============================================================== -->
-
-      <section
-        class="bb-analytics-insights-card"
-        aria-label="Automated Financial Insights"
-      >
-
-        <div class="bb-analytics-section-title-row">
-
-          <h2 class="bb-analytics-section-heading">
-            <span>⚡</span>
-            <span>Automated Financial Insights</span>
-          </h2>
-
-          <span
-            style="
-              font-size:12px;
-              color:var(--bb-text-muted);
-            "
-          >
-            Real-time pattern analysis
-          </span>
-
-        </div>
-
-        <div
-          id="bb-insights-grid"
-          class="bb-analytics-insights-grid"
-        >
-          <!-- Populated by analytics.js -->
-        </div>
-
-      </section>
-
-
-      <!-- ==============================================================
-           CHARTS
-           ============================================================== -->
-
-      <section
-        class="bb-chart-container-grid"
-        aria-label="Interactive Visualizations"
-      >
-
-
-        <!-- Expense Category Doughnut -->
-
-        <article class="bb-chart-card">
-
-          <div class="bb-chart-card-header">
-
-            <h3 class="bb-chart-card-title">
-              <span>🍩</span>
-              <span>Expense Categories</span>
-            </h3>
-
-            <span class="bb-chart-badge">
-              Active Month
-            </span>
-
-          </div>
-
-          <div class="bb-chart-canvas-box">
-
-            <canvas
-              id="bb-chart-category-doughnut"
-              aria-label="Expense Category Doughnut Chart"
-              role="img"
-            ></canvas>
-
-          </div>
-
-        </article>
-
-
-        <!-- Income vs Expenses -->
-
-        <article class="bb-chart-card">
-
-          <div class="bb-chart-card-header">
-
-            <h3 class="bb-chart-card-title">
-              <span>📊</span>
-              <span>Income vs Expenses</span>
-            </h3>
-
-            <span class="bb-chart-badge">
-              Monthly Comparison
-            </span>
-
-          </div>
-
-          <div class="bb-chart-canvas-box">
-
-            <canvas
-              id="bb-chart-income-expense-bar"
-              aria-label="Income vs Expense Bar Chart"
-              role="img"
-            ></canvas>
-
-          </div>
-
-        </article>
-
-
-        <!-- Savings Trend -->
-
-        <article class="bb-chart-card bb-chart-full-width">
-
-          <div class="bb-chart-card-header">
-
-            <h3 class="bb-chart-card-title">
-              <span>📈</span>
-              <span>
-                Savings Trajectory &amp; Wealth Velocity
-              </span>
-            </h3>
-
-            <span class="bb-chart-badge">
-              Multi-Period Trend
-            </span>
-
-          </div>
-
-          <div
-            class="bb-chart-canvas-box"
-            style="min-height:290px;"
-          >
-
-            <canvas
-              id="bb-chart-savings-trend-line"
-              aria-label="Savings Trend Line Chart"
-              role="img"
-            ></canvas>
-
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- ==============================================================
-           SAVINGS GOALS
-           ============================================================== -->
-
-      <section
-        class="bb-savings-section"
-        aria-label="Savings Goals Hub"
-      >
-
-        <div class="bb-analytics-section-title-row">
-
-          <h2 class="bb-analytics-section-heading">
-            <span>🎯</span>
-            <span>Target Savings Goals</span>
-          </h2>
-
-          <span
-            style="
-              font-size:12px;
-              color:var(--bb-text-muted);
-            "
-          >
-            Real-time progress tracking
-          </span>
-
-        </div>
-
-        <div
-          id="bb-savings-goals-grid"
-          class="bb-savings-grid"
-        >
-          <!-- Populated by analytics.js -->
-        </div>
-
-      </section>
-
-
-      <!-- ==============================================================
-           MONTHLY REPORT + HISTORY
-           ============================================================== -->
-
-      <section
-        class="bb-report-history-container"
-        aria-label="Monthly Reports & History"
-      >
-
-
-        <!-- Monthly Report -->
-
-        <article class="bb-report-card">
-
+        <!-- Automated Financial Insights -->
+        <section class="bb-analytics-insights-card" aria-label="Automated Financial Insights">
           <div class="bb-analytics-section-title-row">
+            <h2 class="bb-analytics-section-heading">
+              <span>⚡</span>
+              <span>Automated Financial Insights</span>
+            </h2>
+            <span style="font-size:12px; color:var(--bb-text-muted);">Real-time pattern analysis</span>
+          </div>
+          
+          <div id="bb-insights-grid" class="bb-analytics-insights-grid">
+            <!-- Dynamically populated by bbAnalyticsGenerateInsights -->
+          </div>
+        </section>
 
-            <h3 class="bb-chart-card-title">
-              <span>📑</span>
-              <span>Monthly Report</span>
-            </h3>
+        <!-- Charts Grid (Category Doughnut, Income/Expense Bar, Savings Line) -->
+        <section class="bb-chart-container-grid" aria-label="Interactive Visualizations">
+          
+          <!-- Chart 1: Expense Category Doughnut -->
+          <article class="bb-chart-card">
+            <div class="bb-chart-card-header">
+              <h3 class="bb-chart-card-title">
+                <span>🍩</span>
+                <span>Expense Categories</span>
+              </h3>
+              <span class="bb-chart-badge">Active Month</span>
+            </div>
+            <div class="bb-chart-canvas-box">
+              <canvas id="bb-chart-category-doughnut" aria-label="Expense Category Doughnut Chart" role="img"></canvas>
+            </div>
+          </article>
 
+          <!-- Chart 2: Income vs Expense Monthly Bar -->
+          <article class="bb-chart-card">
+            <div class="bb-chart-card-header">
+              <h3 class="bb-chart-card-title">
+                <span>📊</span>
+                <span>Income vs Expenses</span>
+              </h3>
+              <span class="bb-chart-badge">Monthly Comparison</span>
+            </div>
+            <div class="bb-chart-canvas-box">
+              <canvas id="bb-chart-income-expense-bar" aria-label="Income vs Expense Bar Chart" role="img"></canvas>
+            </div>
+          </article>
+
+          <!-- Chart 3: Savings Trend Line -->
+          <article class="bb-chart-card bb-chart-full-width">
+            <div class="bb-chart-card-header">
+              <h3 class="bb-chart-card-title">
+                <span>📈</span>
+                <span>Savings Trajectory &amp; Wealth Velocity</span>
+              </h3>
+              <span class="bb-chart-badge">Multi-Period Trend</span>
+            </div>
+            <div class="bb-chart-canvas-box" style="min-height: 290px;">
+              <canvas id="bb-chart-savings-trend-line" aria-label="Savings Trend Line Chart" role="img"></canvas>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- Savings Goals Hub -->
+        <section class="bb-savings-section" aria-label="Savings Goals Hub">
+          
+          <div class="bb-analytics-section-title-row">
+            <h2 class="bb-analytics-section-heading">
+              <span>🎯</span>
+              <span>Target Savings Goals</span>
+            </h2>
+            <span style="font-size:12px; color:var(--bb-text-muted);">Real-time progress tracking</span>
           </div>
 
-
-          <div class="bb-report-select-wrapper">
-
-            <label
-              for="bb-report-month-select"
-              style="
-                font-size:12px;
-                color:var(--bb-text-muted);
-                font-weight:600;
-              "
-            >
-              Period:
-            </label>
-
-            <select
-              id="bb-report-month-select"
-              class="bb-report-select"
-              aria-label="Select report month"
-            >
-            </select>
-
+          <div id="bb-savings-goals-grid" class="bb-savings-grid">
+            <!-- Dynamically populated by bbSavingsRenderGoals -->
           </div>
 
+        </section>
 
-          <div class="bb-report-meta-list">
-
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Total Inflow
-              </span>
-
-              <span
-                id="bb-rep-income"
-                class="bb-report-meta-value"
-                style="color:var(--bb-color-income-light);"
-              >
-                ₹0
-              </span>
+        <!-- Monthly Report Card & History Table -->
+        <section class="bb-report-history-container" aria-label="Monthly Reports & History">
+          
+          <!-- Monthly Report Card -->
+          <article class="bb-report-card">
+            <div class="bb-analytics-section-title-row">
+              <h3 class="bb-chart-card-title">
+                <span>📑</span>
+                <span>Monthly Report</span>
+              </h3>
             </div>
 
-
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Total Outflow
-              </span>
-
-              <span
-                id="bb-rep-expenses"
-                class="bb-report-meta-value"
-                style="color:var(--bb-color-expense-light);"
-              >
-                ₹0
-              </span>
+            <div class="bb-report-select-wrapper">
+              <label for="bb-report-month-select" style="font-size:12px; color:var(--bb-text-muted); font-weight:600;">Period:</label>
+              <select id="bb-report-month-select" class="bb-report-select" aria-label="Select report month">
+                <!-- Populated dynamically -->
+              </select>
             </div>
 
+            <div class="bb-report-meta-list">
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Total Inflow</span>
+                <span id="bb-rep-income" class="bb-report-meta-value" style="color:var(--bb-color-income-light);">₹0</span>
+              </div>
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Total Outflow</span>
+                <span id="bb-rep-expenses" class="bb-report-meta-value" style="color:var(--bb-color-expense-light);">₹0</span>
+              </div>
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Net Retained Savings</span>
+                <span id="bb-rep-savings" class="bb-report-meta-value">₹0</span>
+              </div>
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Savings Rate</span>
+                <span id="bb-rep-rate" class="bb-report-meta-value" style="color:var(--bb-color-cyan-light);">0.0%</span>
+              </div>
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Top Expense Category</span>
+                <span id="bb-rep-top-category" class="bb-report-meta-value">None</span>
+              </div>
+              <div class="bb-report-meta-item">
+                <span class="bb-report-meta-label">Recorded Transactions</span>
+                <span id="bb-rep-tx-count" class="bb-report-meta-value">0</span>
+              </div>
+            </div>
+          </article>
 
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Net Retained Savings
-              </span>
-
-              <span
-                id="bb-rep-savings"
-                class="bb-report-meta-value"
-              >
-                ₹0
-              </span>
+          <!-- Monthly History Table -->
+          <article class="bb-report-table-card">
+            <div class="bb-report-table-header">
+              <h3 class="bb-chart-card-title">
+                <span>📅</span>
+                <span>Monthly History</span>
+              </h3>
+              <span style="font-size:12px; color:var(--bb-text-muted);">Click header to sort</span>
             </div>
 
-
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Savings Rate
-              </span>
-
-              <span
-                id="bb-rep-rate"
-                class="bb-report-meta-value"
-                style="color:var(--bb-color-cyan-light);"
-              >
-                0.0%
-              </span>
-            </div>
-
-
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Top Expense Category
-              </span>
-
-              <span
-                id="bb-rep-top-category"
-                class="bb-report-meta-value"
-              >
-                None
-              </span>
-            </div>
-
-
-            <div class="bb-report-meta-item">
-              <span class="bb-report-meta-label">
-                Recorded Transactions
-              </span>
-
-              <span
-                id="bb-rep-tx-count"
-                class="bb-report-meta-value"
-              >
-                0
-              </span>
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- Monthly History -->
-
-        <article class="bb-report-table-card">
-
-          <div class="bb-report-table-header">
-
-            <h3 class="bb-chart-card-title">
-              <span>📅</span>
-              <span>Monthly History</span>
-            </h3>
-
-            <span
-              style="
-                font-size:12px;
-                color:var(--bb-text-muted);
-              "
-            >
-              Click header to sort
-            </span>
-
-          </div>
-
-
-          <table class="bb-report-table">
-
-            <thead>
-
-              <tr>
-
-                <th
-                  scope="col"
-                  data-sort="month"
-                >
-                  Month ⬍
-                </th>
-
-                <th
-                  scope="col"
-                  data-sort="income"
-                >
-                  Income ⬍
-                </th>
-
-                <th
-                  scope="col"
-                  data-sort="expenses"
-                >
-                  Expenses ⬍
-                </th>
-
-                <th
-                  scope="col"
-                  data-sort="savings"
-                >
-                  Savings ⬍
-                </th>
-
-                <th
-                  scope="col"
-                  data-sort="savingsPercentage"
-                >
-                  Savings % ⬍
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody id="bb-history-table-body">
-              <!-- Populated by analytics.js -->
-            </tbody>
-
-          </table>
-
-        </article>
-
-      </section>
-
-    </main>
-
-
-    <!-- ================================================================
-         CREATE SAVINGS GOAL MODAL
-         ================================================================ -->
-
-    <div
-      id="bb-goal-modal"
-      class="bb-modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="bb-goal-modal-title"
-    >
-
-      <div class="bb-modal-box">
-
-        <div class="bb-modal-header">
-
-          <h3
-            id="bb-goal-modal-title"
-            class="bb-modal-title"
-          >
-            <span>🎯</span>
-            <span>Create New Savings Goal</span>
-          </h3>
-
-          <button
-            type="button"
-            id="bb-btn-close-goal-modal"
-            style="
-              color:var(--bb-text-muted);
-              font-size:18px;
-            "
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
-
-        </div>
-
-
-        <form id="bb-goal-form">
-
-          <div class="bb-modal-form-group">
-
-            <label
-              for="bb-input-goal-name"
-              class="bb-modal-label"
-            >
-              Goal Name
-            </label>
-
-            <input
-              type="text"
-              id="bb-input-goal-name"
-              class="bb-modal-input"
-              placeholder="e.g. 🎓 New Laptop, 🚗 Car Fund"
-              required
-            >
-
-          </div>
-
-
-          <div
-            class="bb-modal-form-group"
-            style="margin-top:10px;"
-          >
-
-            <label
-              for="bb-input-goal-target"
-              class="bb-modal-label"
-            >
-              Target Amount (₹)
-            </label>
-
-            <input
-              type="number"
-              id="bb-input-goal-target"
-              class="bb-modal-input"
-              placeholder="80000"
-              min="1"
-              step="any"
-              required
-            >
-
-          </div>
-
-
-          <div
-            class="bb-modal-form-group"
-            style="margin-top:10px;"
-          >
-
-            <label
-              for="bb-input-goal-saved"
-              class="bb-modal-label"
-            >
-              Already Saved Amount (₹)
-            </label>
-
-            <input
-              type="number"
-              id="bb-input-goal-saved"
-              class="bb-modal-input"
-              placeholder="0"
-              min="0"
-              step="any"
-            >
-
-          </div>
-
-
-          <div
-            class="bb-modal-form-group"
-            style="margin-top:10px;"
-          >
-
-            <label
-              for="bb-input-goal-date"
-              class="bb-modal-label"
-            >
-              Target Date
-            </label>
-
-            <input
-              type="date"
-              id="bb-input-goal-date"
-              class="bb-modal-input"
-            >
-
-          </div>
-
-
-          <div class="bb-modal-actions">
-
-            <button
-              type="button"
-              class="bb-modal-btn-cancel"
-              id="bb-btn-cancel-goal-modal"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="submit"
-              class="bb-modal-btn-save"
-            >
-              Create Goal
-            </button>
-
-          </div>
-
-        </form>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================================================================
-         ADD FUNDS TO GOAL MODAL
-         ================================================================ -->
-
-    <div
-      id="bb-deposit-modal"
-      class="bb-modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="bb-deposit-modal-title"
-    >
-
-      <div
-        class="bb-modal-box"
-        style="max-width:380px;"
-      >
-
-        <div class="bb-modal-header">
-
-          <h3
-            id="bb-deposit-modal-title"
-            class="bb-modal-title"
-          >
-            <span>💰</span>
-            <span>Add Funds to Goal</span>
-          </h3>
-
-          <button
-            type="button"
-            id="bb-btn-close-deposit-modal"
-            style="
-              color:var(--bb-text-muted);
-              font-size:18px;
-            "
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
-
-        </div>
-
-
-        <form id="bb-deposit-form">
-
-          <div class="bb-modal-form-group">
-
-            <label
-              for="bb-input-deposit-amt"
-              class="bb-modal-label"
-            >
-              Deposit Amount (₹)
-            </label>
-
-            <input
-              type="number"
-              id="bb-input-deposit-amt"
-              class="bb-modal-input"
-              placeholder="5000"
-              min="1"
-              step="any"
-              required
-            >
-
-          </div>
-
-
-          <div class="bb-modal-actions">
-
-            <button
-              type="button"
-              class="bb-modal-btn-cancel"
-              id="bb-btn-cancel-deposit-modal"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="submit"
-              class="bb-modal-btn-save"
-            >
-              Deposit Funds
-            </button>
-
-          </div>
-
-        </form>
-
-      </div>
+            <table class="bb-report-table">
+              <thead>
+                <tr>
+                  <th scope="col" data-sort="month">Month ⬍</th>
+                  <th scope="col" data-sort="income">Income ⬍</th>
+                  <th scope="col" data-sort="expenses">Expenses ⬍</th>
+                  <th scope="col" data-sort="savings">Savings ⬍</th>
+                  <th scope="col" data-sort="savingsPercentage">Savings % ⬍</th>
+                </tr>
+              </thead>
+              <tbody id="bb-history-table-body">
+                <!-- Dynamically populated by bbReportsRenderHistoryTable -->
+              </tbody>
+            </table>
+          </article>
+
+        </section>
+
+      </main>
 
     </div>
 
   </div>
 
+  <!-- ====================================================================
+       3. MODALS (Create Goal & Add Funds)
+       ==================================================================== -->
+  <!-- Create Savings Goal Modal -->
+  <div id="bb-goal-modal" class="bb-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bb-goal-modal-title">
+    <div class="bb-modal-box">
+      <div class="bb-modal-header">
+        <h3 id="bb-goal-modal-title" class="bb-modal-title">
+          <span>🎯</span>
+          <span>Create New Savings Goal</span>
+        </h3>
+        <button type="button" id="bb-btn-close-goal-modal" style="color:var(--bb-text-muted); font-size:18px;" aria-label="Close modal">&times;</button>
+      </div>
 
-  <!-- Analytics JavaScript -->
+      <form id="bb-goal-form">
+        <div class="bb-modal-form-group">
+          <label for="bb-input-goal-name" class="bb-modal-label">Goal Name</label>
+          <input type="text" id="bb-input-goal-name" class="bb-modal-input" placeholder="e.g. 🎓 New Laptop, 🚗 Car Fund" required>
+        </div>
+
+        <div class="bb-modal-form-group" style="margin-top:10px;">
+          <label for="bb-input-goal-target" class="bb-modal-label">Target Amount (₹)</label>
+          <input type="number" id="bb-input-goal-target" class="bb-modal-input" placeholder="80000" min="1" step="any" required>
+        </div>
+
+        <div class="bb-modal-form-group" style="margin-top:10px;">
+          <label for="bb-input-goal-saved" class="bb-modal-label">Already Saved Amount (₹)</label>
+          <input type="number" id="bb-input-goal-saved" class="bb-modal-input" placeholder="0" min="0" step="any">
+        </div>
+
+        <div class="bb-modal-form-group" style="margin-top:10px;">
+          <label for="bb-input-goal-date" class="bb-modal-label">Target Date</label>
+          <input type="date" id="bb-input-goal-date" class="bb-modal-input">
+        </div>
+
+        <div class="bb-modal-actions">
+          <button type="button" class="bb-modal-btn-cancel" onclick="document.getElementById('bb-goal-modal').classList.remove('bb-modal-active')">Cancel</button>
+          <button type="submit" class="bb-modal-btn-save">Create Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Funds to Goal Modal -->
+  <div id="bb-deposit-modal" class="bb-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="bb-deposit-modal-title">
+    <div class="bb-modal-box" style="max-width: 380px;">
+      <div class="bb-modal-header">
+        <h3 id="bb-deposit-modal-title" class="bb-modal-title">
+          <span>💰</span>
+          <span>Add Funds to Goal</span>
+        </h3>
+        <button type="button" id="bb-btn-close-deposit-modal" style="color:var(--bb-text-muted); font-size:18px;" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="bb-deposit-form">
+        <div class="bb-modal-form-group">
+          <label for="bb-input-deposit-amt" class="bb-modal-label">Deposit Amount (₹)</label>
+          <input type="number" id="bb-input-deposit-amt" class="bb-modal-input" placeholder="5000" min="1" step="any" required>
+        </div>
+
+        <div class="bb-modal-actions">
+          <button type="button" class="bb-modal-btn-cancel" onclick="document.getElementById('bb-deposit-modal').classList.remove('bb-modal-active')">Cancel</button>
+          <button type="submit" class="bb-modal-btn-save">Deposit Funds</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Analytics Module Script (Developer 3) -->
   <script src="js/analytics.js"></script>
 
 </body>
