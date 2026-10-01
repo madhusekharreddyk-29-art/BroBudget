@@ -3,380 +3,938 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BroBudget - Modern Personal Finance & Wealth Management Dashboard. Track income, expenditures, balance, and savings with elegance.">
+
+  <meta
+    name="description"
+    content="BroBudget - Modern Personal Finance & Wealth Management Dashboard. Track income, expenditures, balance, and savings."
+  >
+
   <title>BroBudget | Financial Dashboard & Overview</title>
 
-  <!-- Favicon / App Icon -->
   <link rel="icon" type="image/svg+xml" href="assets/logo/bb-icon.svg">
-
-  <!-- Core Dashboard Stylesheet -->
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
 
-  <!-- Root Application Container -->
   <div class="bb-dashboard-app-container">
 
-    <!-- Mobile Drawer Backdrop -->
-    <div id="bb-sidebar-backdrop" class="bb-sidebar-backdrop" aria-hidden="true"></div>
+    <!-- ================================================================
+         MOBILE SIDEBAR BACKDROP
+         ================================================================ -->
+    <div
+      id="bb-sidebar-backdrop"
+      class="bb-sidebar-backdrop"
+      aria-hidden="true"
+    ></div>
 
-    <!-- ====================================================================
-         1. SIDEBAR NAVIGATION COMPONENT (bb-sidebar-)
-         ==================================================================== -->
-    <aside id="bb-sidebar" class="bb-sidebar-aside" aria-label="Main Navigation">
-      
-      <!-- Brand Header -->
+
+    <!-- ================================================================
+         SIDEBAR NAVIGATION
+         ================================================================ -->
+    <aside
+      id="bb-sidebar"
+      class="bb-sidebar-aside"
+      aria-label="Main Navigation"
+    >
+
+      <!-- Brand -->
       <div class="bb-sidebar-brand-header">
-        <a href="#dashboard" class="bb-sidebar-brand-link" aria-label="BroBudget Home">
+        <a
+          href="index.html"
+          class="bb-sidebar-brand-link"
+          aria-label="BroBudget Home"
+        >
           <div class="bb-sidebar-brand-emblem">
             <span class="bb-sidebar-brand-icon-text">💵 BB</span>
           </div>
+
           <div class="bb-sidebar-brand-meta">
-            <div class="bb-sidebar-brand-title">Bro<span>Budget</span></div>
-            <div class="bb-sidebar-brand-subtitle">Financial OS</div>
+            <div class="bb-sidebar-brand-title">
+              Bro<span>Budget</span>
+            </div>
+
+            <div class="bb-sidebar-brand-subtitle">
+              Financial OS
+            </div>
           </div>
         </a>
       </div>
 
-      <!-- Navigation Links -->
-      <nav class="bb-sidebar-nav-container">
-        <div class="bb-sidebar-nav-label">Navigation</div>
-        
-        <!-- 1. Dashboard (Active - Developer 1) -->
-        <a href="#dashboard" class="bb-sidebar-nav-item bb-sidebar-active" aria-current="page">
+
+      <!-- Navigation -->
+      <nav
+        class="bb-sidebar-nav-container"
+        aria-label="BroBudget Navigation"
+      >
+
+        <div class="bb-sidebar-nav-label">
+          Navigation
+        </div>
+
+
+        <!-- Dashboard -->
+        <a
+          href="index.html"
+          class="bb-sidebar-nav-item bb-sidebar-active"
+          aria-current="page"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">🏠</span>
-            <span class="bb-sidebar-nav-text">Dashboard</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >🏠</span>
+
+            <span class="bb-sidebar-nav-text">
+              Dashboard
+            </span>
           </div>
-          <span class="bb-sidebar-badge" style="background: rgba(16,185,129,0.2); color: #34d399; border-color: rgba(16,185,129,0.4);">Active</span>
+
+          <span
+            class="bb-sidebar-badge"
+            style="background: rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);"
+          >
+            Active
+          </span>
         </a>
 
-        <!-- 2. Income (Placeholder - Dev 2 Module) -->
-        <a href="#income" class="bb-sidebar-nav-item" data-bb-module="Income Tracker" data-bb-dev="Developer 2">
+
+        <!-- Income -->
+        <a
+          href="transactions.html"
+          class="bb-sidebar-nav-item"
+          data-bb-module="Income Tracker"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">💰</span>
-            <span class="bb-sidebar-nav-text">Income</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >💰</span>
+
+            <span class="bb-sidebar-nav-text">
+              Income
+            </span>
           </div>
-          <span class="bb-sidebar-badge">Dev 2</span>
+
+          <span class="bb-sidebar-badge">
+            Transactions
+          </span>
         </a>
 
-        <!-- 3. Expenses (Placeholder - Dev 2 Module) -->
-        <a href="#expenses" class="bb-sidebar-nav-item" data-bb-module="Expense Entry" data-bb-dev="Developer 2">
+
+        <!-- Expenses -->
+        <a
+          href="transactions.html"
+          class="bb-sidebar-nav-item"
+          data-bb-module="Expense Tracker"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">💸</span>
-            <span class="bb-sidebar-nav-text">Expenses</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >💸</span>
+
+            <span class="bb-sidebar-nav-text">
+              Expenses
+            </span>
           </div>
-          <span class="bb-sidebar-badge">Dev 2</span>
+
+          <span class="bb-sidebar-badge">
+            Transactions
+          </span>
         </a>
 
-        <!-- 4. Analytics (Placeholder - Dev 3 Module) -->
-        <a href="#analytics" class="bb-sidebar-nav-item" data-bb-module="Advanced Analytics" data-bb-dev="Developer 3">
+
+        <!-- Analytics -->
+        <a
+          href="analytics.html"
+          class="bb-sidebar-nav-item"
+          data-bb-module="Advanced Analytics"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">📊</span>
-            <span class="bb-sidebar-nav-text">Analytics</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >📊</span>
+
+            <span class="bb-sidebar-nav-text">
+              Analytics
+            </span>
           </div>
-          <span class="bb-sidebar-badge">Dev 3</span>
+
+          <span class="bb-sidebar-badge">
+            Insights
+          </span>
         </a>
 
-        <!-- 5. Savings Goals (Placeholder - Dev 3 Module) -->
-        <a href="#goals" class="bb-sidebar-nav-item" data-bb-module="Savings Goals" data-bb-dev="Developer 3">
+
+        <!-- Savings Goals -->
+        <a
+          href="analytics.html"
+          class="bb-sidebar-nav-item"
+          data-bb-module="Savings Goals"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">🎯</span>
-            <span class="bb-sidebar-nav-text">Savings Goals</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >🎯</span>
+
+            <span class="bb-sidebar-nav-text">
+              Savings Goals
+            </span>
           </div>
-          <span class="bb-sidebar-badge">Dev 3</span>
+
+          <span class="bb-sidebar-badge">
+            Analytics
+          </span>
         </a>
 
-        <!-- 6. Monthly History (Placeholder) -->
-        <a href="#history" class="bb-sidebar-nav-item" data-bb-module="Monthly History" data-bb-dev="BroBudget Core">
+
+        <!-- Monthly History -->
+        <a
+          href="analytics.html"
+          class="bb-sidebar-nav-item"
+          data-bb-module="Monthly History"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">📅</span>
-            <span class="bb-sidebar-nav-text">Monthly History</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >📅</span>
+
+            <span class="bb-sidebar-nav-text">
+              Monthly History
+            </span>
           </div>
         </a>
 
-        <!-- 7. Settings (Placeholder) -->
-        <a href="#settings" class="bb-sidebar-nav-item" data-bb-module="App Settings" data-bb-dev="BroBudget Core">
+
+        <!-- Settings -->
+        <a
+          href="#settings"
+          class="bb-sidebar-nav-item"
+          data-bb-module="App Settings"
+        >
           <div class="bb-sidebar-nav-item-left">
-            <span class="bb-sidebar-nav-icon" aria-hidden="true">⚙️</span>
-            <span class="bb-sidebar-nav-text">Settings</span>
+            <span
+              class="bb-sidebar-nav-icon"
+              aria-hidden="true"
+            >⚙️</span>
+
+            <span class="bb-sidebar-nav-text">
+              Settings
+            </span>
           </div>
         </a>
+
       </nav>
 
-      <!-- Sidebar User Profile Footer -->
+
+      <!-- Sidebar User Profile -->
       <div class="bb-sidebar-footer">
+
         <div class="bb-sidebar-user-card">
-          <div class="bb-sidebar-avatar" aria-hidden="true">BB</div>
+
+          <div
+            class="bb-sidebar-avatar"
+            aria-hidden="true"
+          >
+            BB
+          </div>
+
           <div class="bb-sidebar-user-info">
-            <span class="bb-sidebar-user-name">Alex Mercer</span>
+
+            <span class="bb-sidebar-user-name">
+              Alex Mercer
+            </span>
+
             <span class="bb-sidebar-user-status">
               <span class="bb-sidebar-user-status-dot"></span>
               Pro Member
             </span>
+
           </div>
+
         </div>
+
       </div>
+
     </aside>
 
-    <!-- ====================================================================
-         2. MAIN DASHBOARD WRAPPER (bb-dashboard-)
-         ==================================================================== -->
+
+    <!-- ================================================================
+         MAIN DASHBOARD WRAPPER
+         ================================================================ -->
     <div class="bb-dashboard-main-wrapper">
 
-      <!-- Top Header Bar -->
+
+      <!-- ================================================================
+           TOP HEADER
+           ================================================================ -->
       <header class="bb-dashboard-header">
+
         <div class="bb-dashboard-header-left">
-          <!-- Mobile Toggle Button -->
-          <button id="bb-sidebar-toggle" type="button" class="bb-dashboard-menu-btn" aria-label="Toggle Navigation Sidebar">
+
+          <button
+            id="bb-sidebar-toggle"
+            type="button"
+            class="bb-dashboard-menu-btn"
+            aria-label="Toggle Navigation Sidebar"
+          >
             ☰
           </button>
+
           <div class="bb-dashboard-header-title-box">
-            <h1>Financial Dashboard</h1>
-            <p>Real-time monthly capital flow & savings overview</p>
+
+            <h1>
+              Financial Dashboard
+            </h1>
+
+            <p>
+              Real-time monthly capital flow &amp; savings overview
+            </p>
+
           </div>
+
         </div>
+
 
         <div class="bb-dashboard-header-right">
-          <!-- Real-time Live Badge -->
+
           <div class="bb-dashboard-header-badge">
-            <span class="bb-dashboard-pulse-dot" aria-hidden="true"></span>
-            <span id="bb-current-month-label">October 2026</span>
+
+            <span
+              class="bb-dashboard-pulse-dot"
+              aria-hidden="true"
+            ></span>
+
+            <span id="bb-current-month-label">
+              October 2026
+            </span>
+
           </div>
+
         </div>
+
       </header>
 
-      <!-- Main Content Container -->
+
+      <!-- ================================================================
+           MAIN CONTENT
+           ================================================================ -->
       <main class="bb-dashboard-content">
 
-        <!-- ================================================================
-             3. MONTH SELECTOR BAR (bb-month-)
-             ================================================================ -->
-        <section class="bb-month-bar-card" aria-label="Month Selection">
-          
+
+        <!-- ============================================================
+             MONTH SELECTOR
+             ============================================================ -->
+        <section
+          class="bb-month-bar-card"
+          aria-label="Month Selection"
+        >
+
           <div class="bb-month-selector-left">
+
             <div class="bb-month-selector-title">
               <span>📅</span>
               <span>Select Period:</span>
             </div>
 
-            <!-- Standard Semantic Dropdown -->
+
             <div class="bb-month-dropdown-wrapper">
-              <select id="bb-month-select-dropdown" class="bb-month-dropdown" aria-label="Select Financial Month">
-                <!-- Populated dynamically by bbDashboardSetupMonthSelector -->
-              </select>
-              <span class="bb-month-dropdown-arrow" aria-hidden="true">▼</span>
+
+              <select
+                id="bb-month-select-dropdown"
+                class="bb-month-dropdown"
+                aria-label="Select Financial Month"
+              ></select>
+
+              <span
+                class="bb-month-dropdown-arrow"
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+
             </div>
+
           </div>
 
-          <!-- Quick Navigation Month Pills Carousel -->
-          <div id="bb-month-pills-container" class="bb-month-pills-list" role="tablist" aria-label="Months of the year">
-            <!-- Populated dynamically by bbDashboardSetupMonthSelector -->
-          </div>
 
-          <!-- Month Step Navigation Buttons -->
+          <!-- Month Pills -->
+          <div
+            id="bb-month-pills-container"
+            class="bb-month-pills-list"
+            role="tablist"
+            aria-label="Months of the year"
+          ></div>
+
+
+          <!-- Month Navigation -->
           <div class="bb-month-selector-right">
-            <button id="bb-btn-prev-month" type="button" class="bb-month-btn-nav" title="Previous Month" aria-label="Previous Month">
+
+            <button
+              id="bb-btn-prev-month"
+              type="button"
+              class="bb-month-btn-nav"
+              title="Previous Month"
+              aria-label="Previous Month"
+            >
               ◀
             </button>
-            <button id="bb-btn-next-month" type="button" class="bb-month-btn-nav" title="Next Month" aria-label="Next Month">
+
+            <button
+              id="bb-btn-next-month"
+              type="button"
+              class="bb-month-btn-nav"
+              title="Next Month"
+              aria-label="Next Month"
+            >
               ▶
             </button>
-            <button id="bb-btn-today-month" type="button" class="bb-month-btn-current">
+
+            <button
+              id="bb-btn-today-month"
+              type="button"
+              class="bb-month-btn-current"
+            >
               Current
             </button>
+
           </div>
+
         </section>
 
-        <!-- ================================================================
-             4. FOUR FINANCIAL SUMMARY CARDS (bb-summary-)
-             ================================================================ -->
-        <section class="bb-summary-grid" aria-label="Financial Summary Cards">
-          
-          <!-- Card 1: Income -->
-          <article class="bb-summary-card bb-summary-card-income bb-animate-fade-in" aria-labelledby="card-title-income">
+
+        <!-- ============================================================
+             FOUR FINANCIAL SUMMARY CARDS
+             ============================================================ -->
+        <section
+          class="bb-summary-grid"
+          aria-label="Financial Summary Cards"
+        >
+
+
+          <!-- Income -->
+          <article
+            class="bb-summary-card bb-summary-card-income bb-animate-fade-in"
+            aria-labelledby="card-title-income"
+          >
+
             <div class="bb-summary-card-header">
-              <div class="bb-summary-icon-box" aria-hidden="true">
+
+              <div
+                class="bb-summary-icon-box"
+                aria-hidden="true"
+              >
                 💰
               </div>
-              <span class="bb-summary-tag bb-summary-tag-income">Inflow</span>
+
+              <span class="bb-summary-tag bb-summary-tag-income">
+                Inflow
+              </span>
+
             </div>
+
+
             <div class="bb-summary-card-body">
-              <div id="card-title-income" class="bb-summary-label">Income</div>
+
+              <div
+                id="card-title-income"
+                class="bb-summary-label"
+              >
+                Income
+              </div>
+
               <div class="bb-summary-amount-wrapper">
-                <span class="bb-summary-currency">₹</span>
-                <span id="bb-amount-income" class="bb-summary-amount">0</span>
+
+                <span class="bb-summary-currency">
+                  ₹
+                </span>
+
+                <span
+                  id="bb-amount-income"
+                  class="bb-summary-amount"
+                >
+                  0
+                </span>
+
               </div>
+
             </div>
+
+
             <div class="bb-summary-card-footer">
-              <div id="bb-desc-income" class="bb-summary-desc">
-                <strong>Primary gross inflows</strong> recorded
+
+              <div
+                id="bb-desc-income"
+                class="bb-summary-desc"
+              >
+                <strong>Primary gross inflows</strong>
+                recorded
               </div>
+
             </div>
+
           </article>
 
-          <!-- Card 2: Expenses -->
-          <article class="bb-summary-card bb-summary-card-expense bb-animate-fade-in" aria-labelledby="card-title-expenses">
+
+          <!-- Expenses -->
+          <article
+            class="bb-summary-card bb-summary-card-expense bb-animate-fade-in"
+            aria-labelledby="card-title-expenses"
+          >
+
             <div class="bb-summary-card-header">
-              <div class="bb-summary-icon-box" aria-hidden="true">
+
+              <div
+                class="bb-summary-icon-box"
+                aria-hidden="true"
+              >
                 💸
               </div>
-              <span class="bb-summary-tag bb-summary-tag-expense">Outflow</span>
+
+              <span class="bb-summary-tag bb-summary-tag-expense">
+                Outflow
+              </span>
+
             </div>
+
+
             <div class="bb-summary-card-body">
-              <div id="card-title-expenses" class="bb-summary-label">Expenses</div>
+
+              <div
+                id="card-title-expenses"
+                class="bb-summary-label"
+              >
+                Expenses
+              </div>
+
               <div class="bb-summary-amount-wrapper">
-                <span class="bb-summary-currency">₹</span>
-                <span id="bb-amount-expenses" class="bb-summary-amount">0</span>
+
+                <span class="bb-summary-currency">
+                  ₹
+                </span>
+
+                <span
+                  id="bb-amount-expenses"
+                  class="bb-summary-amount"
+                >
+                  0
+                </span>
+
               </div>
+
             </div>
+
+
             <div class="bb-summary-card-footer">
-              <div id="bb-desc-expenses" class="bb-summary-desc">
-                <strong>60%</strong> of monthly income spent
+
+              <div
+                id="bb-desc-expenses"
+                class="bb-summary-desc"
+              >
+                <strong>60%</strong>
+                of monthly income spent
               </div>
+
             </div>
+
           </article>
 
-          <!-- Card 3: Balance -->
-          <article class="bb-summary-card bb-summary-card-balance bb-animate-fade-in" aria-labelledby="card-title-balance">
+
+          <!-- Balance -->
+          <article
+            class="bb-summary-card bb-summary-card-balance bb-animate-fade-in"
+            aria-labelledby="card-title-balance"
+          >
+
             <div class="bb-summary-card-header">
-              <div class="bb-summary-icon-box" aria-hidden="true">
+
+              <div
+                class="bb-summary-icon-box"
+                aria-hidden="true"
+              >
                 ⚖️
               </div>
-              <span class="bb-summary-tag bb-summary-tag-balance">Liquid Net</span>
+
+              <span class="bb-summary-tag bb-summary-tag-balance">
+                Liquid Net
+              </span>
+
             </div>
+
+
             <div class="bb-summary-card-body">
-              <div id="card-title-balance" class="bb-summary-label">Balance</div>
+
+              <div
+                id="card-title-balance"
+                class="bb-summary-label"
+              >
+                Balance
+              </div>
+
               <div class="bb-summary-amount-wrapper">
-                <span id="bb-currency-balance" class="bb-summary-currency">₹</span>
-                <span id="bb-amount-balance" class="bb-summary-amount">0</span>
+
+                <span
+                  id="bb-currency-balance"
+                  class="bb-summary-currency"
+                >
+                  ₹
+                </span>
+
+                <span
+                  id="bb-amount-balance"
+                  class="bb-summary-amount"
+                >
+                  0
+                </span>
+
               </div>
+
             </div>
+
+
             <div class="bb-summary-card-footer">
-              <div id="bb-desc-balance" class="bb-summary-desc">
-                <strong>Net cash available</strong> after monthly outflow
+
+              <div
+                id="bb-desc-balance"
+                class="bb-summary-desc"
+              >
+                <strong>Net cash available</strong>
+                after monthly outflow
               </div>
+
             </div>
+
           </article>
 
-          <!-- Card 4: Savings -->
-          <article class="bb-summary-card bb-summary-card-savings bb-animate-fade-in" aria-labelledby="card-title-savings">
+
+          <!-- Savings -->
+          <article
+            class="bb-summary-card bb-summary-card-savings bb-animate-fade-in"
+            aria-labelledby="card-title-savings"
+          >
+
             <div class="bb-summary-card-header">
-              <div class="bb-summary-icon-box" aria-hidden="true">
+
+              <div
+                class="bb-summary-icon-box"
+                aria-hidden="true"
+              >
                 🎯
               </div>
-              <span class="bb-summary-tag bb-summary-tag-savings">Retained</span>
+
+              <span class="bb-summary-tag bb-summary-tag-savings">
+                Retained
+              </span>
+
             </div>
+
+
             <div class="bb-summary-card-body">
-              <div id="card-title-savings" class="bb-summary-label">Savings</div>
+
+              <div
+                id="card-title-savings"
+                class="bb-summary-label"
+              >
+                Savings
+              </div>
+
               <div class="bb-summary-amount-wrapper">
-                <span class="bb-summary-currency">₹</span>
-                <span id="bb-amount-savings" class="bb-summary-amount">0</span>
+
+                <span class="bb-summary-currency">
+                  ₹
+                </span>
+
+                <span
+                  id="bb-amount-savings"
+                  class="bb-summary-amount"
+                >
+                  0
+                </span>
+
               </div>
+
             </div>
+
+
             <div class="bb-summary-card-footer">
-              <div id="bb-desc-savings" class="bb-summary-desc">
-                Savings Rate: <strong>40.0%</strong>
+
+              <div
+                id="bb-desc-savings"
+                class="bb-summary-desc"
+              >
+                Savings Rate:
+                <strong>40.0%</strong>
               </div>
+
             </div>
+
           </article>
 
         </section>
 
-        <!-- ================================================================
-             5. MONTHLY FINANCIAL OVERVIEW SECTION (bb-dashboard-overview)
-             ================================================================ -->
-        <section class="bb-dashboard-overview-container" aria-label="Monthly Financial Overview">
-          
-          <!-- Primary Overview Card: Cash Flow & Health Ratio -->
+
+        <!-- ============================================================
+             MONTHLY FINANCIAL OVERVIEW
+             ============================================================ -->
+        <section
+          class="bb-dashboard-overview-container"
+          aria-label="Monthly Financial Overview"
+        >
+
+
+          <!-- Primary Overview -->
           <article class="bb-dashboard-overview-card">
-            
+
             <div class="bb-dashboard-card-title-row">
+
               <div class="bb-dashboard-card-heading">
-                <h2>Monthly Financial Overview</h2>
-                <span>| Analysis & Ratios</span>
+
+                <h2>
+                  Monthly Financial Overview
+                </h2>
+
+                <span>
+                  | Analysis &amp; Ratios
+                </span>
+
               </div>
-              <div id="bb-overview-health-badge" class="bb-dashboard-health-badge bb-health-excellent">
+
+
+              <div
+                id="bb-overview-health-badge"
+                class="bb-dashboard-health-badge bb-health-excellent"
+              >
                 Excellent (40% Saved)
               </div>
+
             </div>
 
-            <!-- Multi-segment Allocation Progress -->
+
+            <!-- Allocation -->
             <div class="bb-overview-ratio-section">
+
               <div class="bb-overview-ratio-header">
-                <span class="bb-overview-ratio-title">Income Distribution & Retention Meter</span>
-                <span class="bb-overview-savings-rate-tag">
-                  Savings Rate: <span id="bb-overview-savings-rate">40.0%</span>
+
+                <span class="bb-overview-ratio-title">
+                  Income Distribution &amp; Retention Meter
                 </span>
+
+                <span class="bb-overview-savings-rate-tag">
+                  Savings Rate:
+                  <span id="bb-overview-savings-rate">
+                    40.0%
+                  </span>
+                </span>
+
               </div>
 
-              <!-- Multi-segment visual bar -->
-              <div class="bb-overview-progress-bar" role="progressbar" aria-label="Income allocation meter" aria-valuemin="0" aria-valuemax="100">
-                <div id="bb-overview-bar-expense" class="bb-overview-bar-expense" style="width: 60%;" title="Expenses"></div>
-                <div id="bb-overview-bar-savings" class="bb-overview-bar-savings" style="width: 40%;" title="Savings"></div>
+
+              <div
+                class="bb-overview-progress-bar"
+                role="progressbar"
+                aria-label="Income allocation meter"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+
+                <div
+                  id="bb-overview-bar-expense"
+                  class="bb-overview-bar-expense"
+                  style="width:60%;"
+                  title="Expenses"
+                ></div>
+
+                <div
+                  id="bb-overview-bar-savings"
+                  class="bb-overview-bar-savings"
+                  style="width:40%;"
+                  title="Savings"
+                ></div>
+
               </div>
+
 
               <div class="bb-overview-ratio-legend">
+
                 <div class="bb-overview-legend-item">
-                  <span class="bb-overview-legend-color bb-color-exp"></span>
-                  <span>Expenses (Outflow)</span>
+
+                  <span
+                    class="bb-overview-legend-color bb-color-exp"
+                  ></span>
+
+                  <span>
+                    Expenses (Outflow)
+                  </span>
+
                 </div>
+
+
                 <div class="bb-overview-legend-item">
-                  <span class="bb-overview-legend-color bb-color-sav"></span>
-                  <span>Savings & Capital Retention</span>
+
+                  <span
+                    class="bb-overview-legend-color bb-color-sav"
+                  ></span>
+
+                  <span>
+                    Savings &amp; Capital Retention
+                  </span>
+
                 </div>
+
               </div>
+
             </div>
 
-            <!-- Three Financial Key Metrics Sub-grid -->
+
+            <!-- Key Metrics -->
             <div class="bb-overview-metrics-grid">
-              
+
+
+              <!-- Daily Burn -->
               <div class="bb-overview-sub-metric">
-                <div class="bb-overview-sub-label">Daily Burn Rate</div>
-                <div id="bb-sub-daily-spend" class="bb-overview-sub-value">₹1,000</div>
-                <div class="bb-overview-sub-desc">Average expenditures / day</div>
+
+                <div class="bb-overview-sub-label">
+                  Daily Burn Rate
+                </div>
+
+                <div
+                  id="bb-sub-daily-spend"
+                  class="bb-overview-sub-value"
+                >
+                  ₹1,000
+                </div>
+
+                <div class="bb-overview-sub-desc">
+                  Average expenditures / day
+                </div>
+
               </div>
 
+
+              <!-- Net Cash Flow -->
               <div class="bb-overview-sub-metric">
-                <div class="bb-overview-sub-label">Net Cash Flow</div>
-                <div id="bb-sub-net-status" class="bb-overview-sub-value" style="color: var(--bb-color-income-light);">Net Surplus</div>
-                <div id="bb-sub-net-desc" class="bb-overview-sub-desc">Retained positive liquid buffer</div>
+
+                <div class="bb-overview-sub-label">
+                  Net Cash Flow
+                </div>
+
+                <div
+                  id="bb-sub-net-status"
+                  class="bb-overview-sub-value"
+                  style="color:var(--bb-color-income-light);"
+                >
+                  Net Surplus
+                </div>
+
+                <div
+                  id="bb-sub-net-desc"
+                  class="bb-overview-sub-desc"
+                >
+                  Retained positive liquid buffer
+                </div>
+
               </div>
 
+
+              <!-- 50/30/20 -->
               <div class="bb-overview-sub-metric">
-                <div class="bb-overview-sub-label">50/30/20 Rule Target</div>
-                <div id="bb-sub-rule-status" class="bb-overview-sub-value" style="color: var(--bb-color-savings-light);">Target Met (≥20%)</div>
-                <div class="bb-overview-sub-desc">Healthy wealth accumulation</div>
+
+                <div class="bb-overview-sub-label">
+                  50/30/20 Rule Target
+                </div>
+
+                <div
+                  id="bb-sub-rule-status"
+                  class="bb-overview-sub-value"
+                  style="color:var(--bb-color-savings-light);"
+                >
+                  Target Met (≥20%)
+                </div>
+
+                <div class="bb-overview-sub-desc">
+                  Healthy wealth accumulation
+                </div>
+
               </div>
 
             </div>
 
           </article>
 
-          <!-- Secondary Overview Card: Category Preview Distribution -->
+
+          <!-- Category Distribution -->
           <article class="bb-dashboard-secondary-card">
-            
+
             <div class="bb-dashboard-card-title-row">
+
               <div class="bb-dashboard-card-heading">
-                <h2>Category Distribution</h2>
+
+                <h2>
+                  Category Distribution
+                </h2>
+
               </div>
+
             </div>
 
-            <!-- Category Distribution Bars -->
-            <div id="bb-category-list" class="bb-dashboard-cat-list">
-              <!-- Dynamically populated by bbDashboardRenderCategories -->
+
+            <div
+              id="bb-category-list"
+              class="bb-dashboard-cat-list"
+            >
+              <!-- Populated dynamically by dashboard.js -->
             </div>
 
-            <!-- Developer 2 & 3 Integration Callout -->
+
+            <!-- Integration Note -->
             <div class="bb-dashboard-dev-integration-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                ></circle>
+
+                <line
+                  x1="12"
+                  y1="16"
+                  x2="12"
+                  y2="12"
+                ></line>
+
+                <line
+                  x1="12"
+                  y1="8"
+                  x2="12.01"
+                  y2="8"
+                ></line>
               </svg>
+
               <span>
-                <strong>Dev 2 &amp; Dev 3 Integration Hook:</strong> This module consumes data from <code>window.BBDashboard</code> and dispatches <code>bb:month-changed</code> events.
+                <strong>
+                  BroBudget Integration:
+                </strong>
+
+                Dashboard data is synchronized with the
+                Transactions and Analytics modules through
+                shared browser storage and BroBudget events.
               </span>
+
             </div>
 
           </article>
@@ -389,7 +947,10 @@
 
   </div>
 
-  <!-- Main JavaScript File -->
+
+  <!-- ================================================================
+       DASHBOARD JAVASCRIPT
+       ================================================================ -->
   <script src="js/dashboard.js"></script>
 
 </body>
